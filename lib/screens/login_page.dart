@@ -77,10 +77,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-
-
-
-
   Widget _elevatedButton(String text, BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(8.0, 25.0, 8.0, 0.0),
@@ -149,12 +145,12 @@ class _LoginPageState extends State<LoginPage> {
                     value: _rememberMe,
                     onChanged: (value) {
                       setState(() {
-                        _rememberMe = value!; // Memperbarui nilai _rememberMe ketika checkbox diubah
+                        _rememberMe = value!;
                       });
                     },
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 50.0),
+                    padding: const EdgeInsets.only(right: 45.0),
                     child: Text(
                       'Remember me',
                       style: TextStyle(
@@ -168,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
 
                     },
                     child: Text(
-                      'Forgot Password',
+                      'Forgot Password?',
                       style: TextStyle(
                         fontSize: 16,
                         color: AppColors.secondary1Color,
@@ -178,18 +174,85 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-
-
-
-
-              if (message != null) Padding(
-                padding: const EdgeInsets.fromLTRB(5.0, 20.0, 8.0,0.0),
-                child: Text(message!, style: TextStyle(
-                    color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold
-                )),
-              ),
               _elevatedButton("Login", context),
-              // Show message if exists
+              if (message != null)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5.0, 20.0, 8.0, 0.0),
+                  child: Text(
+                    message!,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: AppColors.secondary1Color,
+                        thickness: 1,
+                        indent: 35,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        'Or login using',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppColors.secondary1Color,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Divider(
+                        color: AppColors.secondary1Color,
+                        thickness: 1,
+                        endIndent: 35,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 0.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('images/google.png', width: 30, height: 30),
+                    const SizedBox(width: 8),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Dont have account yet?',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.secondary4Color,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+
+                    },
+                    child: Text(
+                      ' Register Here',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: AppColors.primaryColor,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
