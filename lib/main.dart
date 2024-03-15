@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:joblyst/screens/boarding_page.dart';
+import 'package:joblyst/screens/boarding2_page.dart';
+import 'package:joblyst/screens/register_page.dart';
 import 'package:joblyst/screens/login_page.dart';
+import 'package:joblyst/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +24,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: const LoginPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/register': (context) => RegisterPage(),
+        '/login': (context) => LoginPage(),
+        '/boarding': (context) => Boarding2Page(),
+      },
     );
   }
 }

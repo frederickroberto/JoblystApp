@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:joblyst/constant/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final String? message;
 
-  const LoginPage({Key? key, this.message}) : super(key: key);
+  const RegisterPage({Key? key, this.message}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final userController = TextEditingController();
+  final emailController = TextEditingController();
   final passController = TextEditingController();
+  final passController1 = TextEditingController();
   String? message;
   bool _isObscure = true;
-  bool _rememberMe = false;
 
   @override
   void initState() {
@@ -46,7 +46,13 @@ class _LoginPageState extends State<LoginPage> {
                 enabled: true,
                 obscureText: isPassword && _isObscure,
                 decoration: InputDecoration(
-                  hintText: hintText == 'Email' ? 'Enter your email' : 'Enter your password',
+                  hintText: hintText == 'Username'
+                      ? 'Enter your username'
+                      : hintText == 'Email'
+                      ? 'Enter your email'
+                      : hintText == 'Password'
+                      ? 'Enter your password'
+                      : 'Confirm your password',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide.none,
@@ -82,11 +88,11 @@ class _LoginPageState extends State<LoginPage> {
       padding: const EdgeInsets.fromLTRB(8.0, 25.0, 8.0, 0.0),
       child: ElevatedButton(
         onPressed: () {
-          if (userController.text == "user1" && passController.text == "12345") {
+          if (userController.text == "user1" && emailController.text == "email1" && passController.text == "12345") {
             Navigator.pop(context);
           } else {
             setState(() {
-              message = "Login Gagal";
+              message = "Register Gagal";
             });
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message!)));
           }
@@ -120,62 +126,28 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.fromLTRB(8.0, 60.0, 8.0, 0.0),
                 child: SizedBox(
                   width: 200,
-                  child: Image.asset('images/login.png'),
+                  child: Image.asset('images/register.png'),
                 ),
               ),
               const Padding(
                 padding: EdgeInsets.fromLTRB(8.0, 10.0, 8.0, 0.0),
                 child: Text(
-                  "Welcome back!",
+                  "Create an account!",
                   style: TextStyle(fontSize: 24, color: AppColors.primaryColor),
                 ),
               ),
               const Padding(
                 padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
                 child: Text(
-                  "Login your account",
+                  "Let's create account together",
                   style: TextStyle(fontSize: 16, color: AppColors.secondary1Color),
                 ),
               ),
-              _inputField("Email", controller: userController),
+              _inputField("Username", controller: userController),
+              _inputField("Email", controller: emailController),
               _inputField("Password", controller: passController, isPassword: true),
-              Row(
-                children: [
-                  Checkbox(
-                    value: _rememberMe,
-                    onChanged: (value) {
-                      setState(() {
-                        _rememberMe = value!;
-                      });
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 45.0),
-                    child: Text(
-                      'Remember me',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: AppColors.secondary1Color,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 120),
-                  GestureDetector(
-                    onTap: () {
-
-                    },
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: AppColors.secondary1Color,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              _elevatedButton("Login", context),
+              _inputField("Confirm Password", controller: passController1, isPassword: true),
+              _elevatedButton("Register", context),
               if (message != null)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(5.0, 20.0, 8.0, 0.0),
@@ -188,71 +160,33 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        color: AppColors.secondary1Color,
-                        thickness: 1,
-                        indent: 35,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
-                        'Or login using',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: AppColors.secondary1Color,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        color: AppColors.secondary1Color,
-                        thickness: 1,
-                        endIndent: 35,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0.0),
+                padding: const EdgeInsets.only(top: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('images/google.png', width: 30, height: 30),
-                    const SizedBox(width: 8),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Dont have account yet?',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.secondary4Color,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/register');
-                    },
-                    child: Text(
-                      ' Register Here',
+                    const Text(
+                      'Already have an account?',
                       style: TextStyle(
                         fontSize: 16,
-                        color: AppColors.primaryColor,
-                        decoration: TextDecoration.underline,
+                        color: AppColors.secondary4Color,
                       ),
                     ),
-                  ),
-                ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/login');
+                      },
+                      child: Text(
+                        'Login Here',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppColors.primaryColor,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
