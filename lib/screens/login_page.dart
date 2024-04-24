@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:joblyst/constant/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:joblyst/repository_login.dart'; // Import file LoginAPI
+import 'package:joblyst/model_login.dart';
 
 class LoginPage extends StatefulWidget {
   final String? message;
@@ -78,12 +79,22 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _elevatedButton(String text, BuildContext context) {
+    final loginAPI = LoginAPI('https://joblyst-api-cpe5hpucwa-uc.a.run.app');
+
     return Container(
       padding: const EdgeInsets.fromLTRB(8.0, 25.0, 8.0, 0.0),
       child: ElevatedButton(
-        onPressed: () {
-          if (userController.text == "user1" && passController.text == "12345") {
+        onPressed: () async {
+          final loginData = Login(
+            email: userController.text,
+            password: passController.text,
+          );
+
+          final bool loginSuccess = await loginAPI.login(loginData);
+
+          if (loginSuccess) {
             Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, '/tag');
           } else {
             setState(() {
               message = "Login Gagal";
@@ -96,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: AppColors.primaryColor,
           foregroundColor: AppColors.secondary2Color,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0), //
+            borderRadius: BorderRadius.circular(10.0),
           ),
         ),
         child: Text(
@@ -162,7 +173,6 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(width: 120),
                   GestureDetector(
                     onTap: () {
-
                     },
                     child: Text(
                       'Forgot Password?',
@@ -244,7 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.pushNamed(context, '/register');
                     },
                     child: Text(
-                      ' Register Here',
+                      'Register Here',
                       style: TextStyle(
                         fontSize: 16,
                         color: AppColors.primaryColor,

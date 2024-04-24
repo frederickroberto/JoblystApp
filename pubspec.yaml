@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.2.1
+  shared_preferences: ^2.0.10
   google_fonts: ^6.2.0
 
 
@@ -70,6 +72,8 @@ flutter:
     - images/slide.png
     - images/slide2.png
     - images/icon_next.png
+    - images/icon_back.png
+    - images/jobcategory.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -5,6 +5,7 @@ import 'package:joblyst/screens/boarding2_page.dart';
 import 'package:joblyst/screens/register_page.dart';
 import 'package:joblyst/screens/login_page.dart';
 import 'package:joblyst/screens/splash_screen.dart';
+import 'package:joblyst/screens/tag_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterPage(),
         '/login': (context) => LoginPage(),
         '/boarding': (context) => Boarding2Page(),
+        '/tag': (context) => TagPage(),
       },
     );
   }
